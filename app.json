@@ -1,30 +1,39 @@
 {
   "expo": {
-    "name": "klamando",
+    "name": "Klamando",
     "slug": "klamando",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#203a43",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.klamando.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Klamando nutzt deinen Standort, um das Wetter und passende Kleidung für deinen Ort anzuzeigen."
+      }
     },
     "android": {
+      "package": "com.klamando.app",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#2f80ed",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Klamando nutzt deinen Standort, um das Wetter und passende Kleidung für deinen Ort anzuzeigen."
+        }
+      ]
+    ]
   }
 }
