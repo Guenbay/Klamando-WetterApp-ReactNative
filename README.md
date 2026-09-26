@@ -4,6 +4,19 @@ Klamando ist eine native Handy-App (Android & iOS, React Native + Expo SDK 57).
 Sie holt das Wetter von der **kostenlosen Open-Meteo-API** (kein API-Key, keine Anmeldung)
 und übersetzt es direkt in eine **Kleidungsempfehlung**.
 
+## 🚀 Ausprobieren – ohne Installation
+
+- **Im Browser (Web-App):** **[Klamando öffnen](https://guenbay.github.io/Klamando-WetterApp-ReactNative/)**
+  Läuft auf jedem Gerät. Auf dem Handy „Zum Startbildschirm hinzufügen“ wählen,
+  dann verhält sie sich wie eine installierte App.
+- **Android (APK):** **[Neueste Version herunterladen](https://github.com/Guenbay/Klamando-WetterApp-ReactNative/releases/latest)**
+  (`klamando.apk`). Direkt aufs Handy laden und öffnen; bei Bedarf „Installation aus
+  unbekannter Quelle“ erlauben. Kostenlos, kein Konto nötig.
+- **iPhone:** aktuell nur über die Web-App oben (kein Apple-Developer-Konto vorhanden).
+
+Beides wird bei jeder Änderung an `main` automatisch neu gebaut (siehe
+[`.github/workflows/publish.yml`](.github/workflows/publish.yml)).
+
 ## Funktionen
 
 | | |
@@ -28,7 +41,7 @@ und übersetzt es direkt in eine **Kleidungsempfehlung**.
 - **Offline-fähig:** Die letzte Vorhersage wird gespeichert und bei fehlendem Netz mit Zeitstempel angezeigt.
 - **Keine Werbung, kein Tracking, kein Konto, kein API-Key.**
 
-## Starten (auf dem Handy)
+## Lokal entwickeln (Expo Go)
 
 1. [Node.js](https://nodejs.org) (LTS) installieren.
 2. Abhängigkeiten installieren:
@@ -42,7 +55,10 @@ und übersetzt es direkt in eine **Kleidungsempfehlung**.
 4. Auf dem Handy die App **Expo Go** installieren (App Store / Play Store) und den QR-Code scannen.
    Handy und Rechner müssen im selben WLAN sein (sonst `npx expo start --tunnel`).
 
-## Als echte App installieren (APK für Android)
+## Eigene APK bauen (optional)
+
+Die fertige APK gibt es unter [Releases](https://github.com/Guenbay/Klamando-WetterApp-ReactNative/releases/latest) –
+das hier ist nur nötig, wenn ihr selbst und mit eigenem Expo-Konto bauen wollt:
 
 ```bash
 npm install -g eas-cli
@@ -50,7 +66,6 @@ eas login
 eas build -p android --profile preview
 ```
 
-Am Ende gibt es einen Download-Link zur `.apk`, die direkt auf dem Handy installiert werden kann.
 Für iOS: `eas build -p ios` (benötigt einen Apple-Developer-Account).
 
 ## Tests
@@ -74,8 +89,13 @@ src/components/             Hintergrund-Animation, UI-Bausteine
 src/screens/                Heute, 7/14 Tage, Orte
 src/useWeather.js           Laden, Standort, Offline-Cache
 tests/                      Unit-Tests
+.github/workflows/          Automatisches Bauen & Veröffentlichen (Web + APK)
 ```
+
+## Lizenz
+
+[MIT](LICENSE) – frei nutzbar, veränderbar und weitergebbar für alle.
 
 Wetterdaten: [Open-Meteo.com](https://open-meteo.com) (CC BY 4.0).
 
-Erstellt von Lina, Ziko, Günbay.
+Erstellt von Lina, Ziko, Günbay Sali.
