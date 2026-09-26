@@ -17,6 +17,10 @@ und übersetzt es direkt in eine **Kleidungsempfehlung**.
 Beides wird bei jeder Änderung an `main` automatisch neu gebaut (siehe
 [`.github/workflows/publish.yml`](.github/workflows/publish.yml)).
 
+<p align="center">
+  <img src="docs/screenshots/overview.png" alt="Klamando Screenshots: Heute, 14-Tage-Vorhersage, Schnee-Hintergrund, Ortssuche" width="820">
+</p>
+
 ## Funktionen
 
 | | |
