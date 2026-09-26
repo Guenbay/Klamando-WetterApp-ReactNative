@@ -1,5 +1,8 @@
 # 👕 Klamando – die Wetter-App, die dir sagt, was du anziehen sollst
 
+[![Web-App & APK veröffentlichen](https://github.com/Guenbay/Klamando-WetterApp-ReactNative/actions/workflows/publish.yml/badge.svg)](https://github.com/Guenbay/Klamando-WetterApp-ReactNative/actions/workflows/publish.yml)
+[![Neueste APK](https://img.shields.io/github/v/release/Guenbay/Klamando-WetterApp-ReactNative?label=APK&color=3DDC84&logo=android&logoColor=white)](https://github.com/Guenbay/Klamando-WetterApp-ReactNative/releases/latest)
+
 Klamando ist eine native Handy-App (Android & iOS, React Native + Expo SDK 57).
 Sie holt das Wetter von der **kostenlosen Open-Meteo-API** (kein API-Key, keine Anmeldung)
 und übersetzt es direkt in eine **Kleidungsempfehlung**.
@@ -9,13 +12,16 @@ und übersetzt es direkt in eine **Kleidungsempfehlung**.
 - **Im Browser (Web-App):** **[Klamando öffnen](https://guenbay.github.io/Klamando-WetterApp-ReactNative/)**
   Läuft auf jedem Gerät. Auf dem Handy „Zum Startbildschirm hinzufügen“ wählen,
   dann verhält sie sich wie eine installierte App.
-- **Android (APK):** **[Neueste Version herunterladen](https://github.com/Guenbay/Klamando-WetterApp-ReactNative/releases/latest)**
-  (`klamando.apk`). Direkt aufs Handy laden und öffnen; bei Bedarf „Installation aus
-  unbekannter Quelle“ erlauben. Kostenlos, kein Konto nötig.
+- **Android (APK):** **[⬇️ klamando.apk herunterladen](https://github.com/Guenbay/Klamando-WetterApp-ReactNative/releases/latest/download/klamando.apk)**
+  (lädt die Datei direkt herunter, ca. 130 MB). Auf dem Handy öffnen und bei Bedarf
+  „Installation aus unbekannter Quelle“ erlauben. Kostenlos, kein Konto nötig.
+  <br>Alternativ manuell: rechts auf dieser Repo-Seite unter **„Releases“** auf
+  **„Klamando – neueste Version“** klicken, dort unter **Assets** auf `klamando.apk`.
 - **iPhone:** aktuell nur über die Web-App oben (kein Apple-Developer-Konto vorhanden).
 
 Beides wird bei jeder Änderung an `main` automatisch neu gebaut (siehe
-[`.github/workflows/publish.yml`](.github/workflows/publish.yml)).
+[`.github/workflows/publish.yml`](.github/workflows/publish.yml)) – der Badge oben
+zeigt, ob der letzte Bau-Vorgang erfolgreich war.
 
 <p align="center">
   <img src="docs/screenshots/overview.png" alt="Klamando Screenshots: Heute, 14-Tage-Vorhersage, Schnee-Hintergrund, Ortssuche" width="820">
