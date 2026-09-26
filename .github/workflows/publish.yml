@@ -77,7 +77,9 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - uses: android-actions/setup-android@v3
+      # GitHub-Runner bringen bereits ein Android-SDK mit akzeptierten Lizenzen mit;
+      # ein zusätzliches Setup-Plugin ist nicht nötig (und ältere Plugins scheitern
+      # inzwischen am veralteten "tools"-Paket, das im SDK nicht mehr existiert).
       - run: npm ci
       - name: Natives Android-Projekt erzeugen
         run: npx expo prebuild --platform android --no-install
