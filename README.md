@@ -19,10 +19,6 @@ und übersetzt es direkt in eine **Kleidungsempfehlung**.
   **„Klamando – neueste Version“** klicken, dort unter **Assets** auf `klamando.apk`.
 - **iPhone:** aktuell nur über die Web-App oben (kein Apple-Developer-Konto vorhanden).
 
-Beides wird bei jeder Änderung an `main` automatisch neu gebaut (siehe
-[`.github/workflows/publish.yml`](.github/workflows/publish.yml)) – der Badge oben
-zeigt, ob der letzte Bau-Vorgang erfolgreich war.
-
 <p align="center">
   <img src="docs/screenshots/overview.png" alt="Klamando Screenshots: Heute, 14-Tage-Vorhersage, Schnee-Hintergrund, Ortssuche" width="820">
 </p>
