@@ -1,0 +1,108 @@
+name: Klamando veröffentlichen
+
+# Baut bei jedem Push auf main:
+# - die Web-Version und veröffentlicht sie auf GitHub Pages
+# - eine installierbare Android-APK als GitHub Release "latest"
+# Beides ist kostenlos (GitHub Actions) und braucht keine Konten/Keys.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  web:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Web-Version bauen
+        run: npx expo export --platform web --output-dir dist
+        env:
+          CI: "1"
+      - name: Pfade für GitHub Pages anpassen
+        # GitHub Pages liefert das Projekt unter /<repo-name>/ aus, der Metro-Web-Export
+        # verlinkt Assets aber absolut ab "/". Wir machen die Pfade relativ, dann passt
+        # es unabhängig davon, unter welchem Pfad die Seite läuft.
+        run: sed -i -E 's/(src|href)="\//\1="/g' dist/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  android:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: android-actions/setup-android@v3
+      - run: npm ci
+      - name: Natives Android-Projekt erzeugen
+        run: npx expo prebuild --platform android --no-install
+        env:
+          CI: "1"
+          EXPO_NO_GIT_STATUS: "1"
+      - name: APK bauen (debug-signiert, direkt installierbar)
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+      - name: APK umbenennen
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk klamando.apk
+      - name: Release "latest" veröffentlichen
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Klamando – neueste Version
+          body: |
+            Automatisch gebaute Android-APK vom neuesten Stand des `main`-Branches.
+
+            **Installation:** `klamando.apk` herunterladen, auf dem Handy öffnen und
+            „Installation aus unbekannter Quelle" erlauben, falls gefragt.
+
+            Dies ist ein Debug-Build (kein Play-Store-Release), funktioniert aber
+            identisch und ist kostenlos ohne Konto installierbar.
+          files: klamando.apk
+          make_latest: "true"
